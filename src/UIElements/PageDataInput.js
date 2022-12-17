@@ -2,22 +2,21 @@ import styled, { css } from "styled-components";
 
 const PageDataInput = (props) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        gap: "0.5rem",
-        width: "100%",
-      }}
-    >
-      <div style={{display:"flex"}}>
+    <DataInputControl>
+      <div style={{ display: "flex" }}>
         <DataInputLabel>{props.field}</DataInputLabel>
       </div>
 
-      <DataInputField />
-    </div>
+      <DataInputField onChange={props.edit} value={props.value} />
+    </DataInputControl>
   );
 };
+const DataInputControl = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  width: 100%;
+`;
 
 const DataInputLabel = styled.div`
   width: 2.2rem;

@@ -8,7 +8,7 @@ export const pageDataSlice = createSlice({
       author: "",
       year: "",
       area: "",
-      title: "",
+      title: "title",
       tags: [],
       subtitles: [],
     },

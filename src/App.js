@@ -20,6 +20,8 @@ function App() {
     >
       <StepOne />
       <StepTwo />
+      <StepThree />
+      <StepFour />
     </div>
   );
 }
