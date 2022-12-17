@@ -3,6 +3,7 @@ import StepOne from "./Forms/StepOne";
 import StepTwo from "./Forms/StepTwo";
 import StepThree from "./Forms/StepThree";
 import StepFour from "./Forms/StepFour";
+import store from "./Store/store";
 
 function App() {
   return (
@@ -14,9 +15,11 @@ function App() {
         marginTop: "10rem",
         display: "flex",
         flexDirection: "column",
+        gap: "1.5rem"
       }}
     >
       <StepOne />
+      <StepTwo />
     </div>
   );
 }

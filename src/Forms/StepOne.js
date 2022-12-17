@@ -1,27 +1,31 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import StepContainer from "../UIElements/StepContainer";
 import styled, { css } from "styled-components";
 import ReactLoading from 'react-loading';
+import {useSelector,useDispatch} from 'react-redux';
+import {setURL,setPage,clear} from '../Store/pageDataSlice';
 
 const StepOne = (props) => {
   const [urlInput, setURLInput] = useState("Enter url here...");
   const [isDefault, setIsDefault] = useState(true);
-  const [urlInvalid, setURLInvalid] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
+  const [errorMessage,setErrorMessage] = useState("");
+
+  const dispatch = useDispatch()
 
   const onChangeHandler = (event) => {
     setURLInput(event.target.value);
-    if (urlInvalid) {
-      setURLInvalid(false);
+    if (errorMessage.length > 0) {
+      setErrorMessage("");
     }
   };
 
   const onFocusHandler = (event) => {
-    if (isDefault || urlInvalid) {
+    if (isDefault || (errorMessage === "Invalid URL")) {
       setURLInput("");
       setIsDefault(false);
-      setURLInvalid(false);
+      setErrorMessage("");
     }
   };
 
@@ -38,7 +42,7 @@ const StepOne = (props) => {
     // string validation
     if (!validateHttpURL(urlInput)) {
       console.log("not a valid http url");
-      setURLInvalid(true);
+      setErrorMessage("Invalid URL")
       return;
     }
     
@@ -66,12 +70,17 @@ const StepOne = (props) => {
 
         return response.json();
       })
-      .then((jsonData) => {
+      .then((jsonObject) => {
 
         setIsFetching(false);
 
-        // process data (redux)
+        // data inspection and cleaning
+        console.log(jsonObject);
+        let cleanedData = jsonObject;
 
+        // write data to store
+        dispatch(setURL(urlInput));
+        dispatch(setPage(cleanedData));
       })
       .catch(handleFetchError);
   };
@@ -79,9 +88,8 @@ const StepOne = (props) => {
   const handleFetchError = (error) => {
     console.log("Error during fetch: " + error);
     setIsFetching(false);
+    setErrorMessage("Connection Error");
   };
-
-  const handleStatusError = (status) => {};
 
   const validateHttpURL = (urlString) => {
     try {
@@ -106,7 +114,7 @@ const StepOne = (props) => {
       ></URLInput>
       <button onClick={urlSubmitHandler}> Submit </button>
       {isFetching && <ReactLoading type="spinningBubbles" color="gray" width={32} height={32}/>}
-      {urlInvalid && <ErrorMessageLabel> Invalid URL </ErrorMessageLabel>}
+      {(errorMessage.length > 0) && <ErrorMessageLabel> {errorMessage} </ErrorMessageLabel>}
     </StepOneContainer>
   );
 };
