@@ -45,6 +45,10 @@ const StepOne = (props) => {
       setErrorMessage("Invalid URL")
       return;
     }
+
+    if (isFetching) {
+      return;
+    }
     
     const api = "";
     const data = { url: urlInput };
