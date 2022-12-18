@@ -1,1 +1,2 @@
-## A frontend window to streamline submission to a bookstack api
+## bookstack-submit 
+A frontend window to streamline submission to a bookstack api
