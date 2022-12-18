@@ -2,7 +2,6 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 const SubtitleSelector = (props) => {
-
   const raiseButtonHandler = (event) => {
     props.handleLevel(props.id, -1);
   };
@@ -12,8 +11,8 @@ const SubtitleSelector = (props) => {
   };
 
   const crossButtonHandler = (event) => {
-    props.handleCross(props.id,!props.valid);
-  }
+    props.handleCross(props.id, !props.valid);
+  };
 
   const fontSizeMapper = (level) => {
     switch (level) {
@@ -32,19 +31,32 @@ const SubtitleSelector = (props) => {
   let marginLeft = props.level * 1.2;
 
   return (
-      <SubtitleLineControl
-        size={fontSize}
-        margin={marginLeft}
-        valid={props.valid}
-      >
-        <div>{props.line}</div>
-        <SubtitleButtonControl>
-          <SubtitleButton onClick={raiseButtonHandler}>+</SubtitleButton>
-          <SubtitleButton onClick={lowerButtonHandler}>-</SubtitleButton>
-        </SubtitleButtonControl>
-      </SubtitleLineControl>
+    <SubtitleLineControl margin={marginLeft}>
+      <SubtitleLine size={fontSize} valid={props.valid}>
+        {props.line}
+      </SubtitleLine>
+      <SubtitleButtonControl>
+        <SubtitleButton onClick={raiseButtonHandler}>+</SubtitleButton>
+        <SubtitleButton onClick={lowerButtonHandler}>-</SubtitleButton>
+        <SubtitleButton onClick={crossButtonHandler}>
+          {props.valid ? "x" : "√"}
+        </SubtitleButton>
+      </SubtitleButtonControl>
+    </SubtitleLineControl>
   );
 };
+
+const SubtitleLine = styled.div((props) => 
+  css`
+    font-size: ${props.size}rem;
+
+    ${!props.valid &&
+    css`
+      text-decoration: line-through;
+      color: rgba(0,0,0,0.6);
+    `}
+  `
+);
 
 const SubtitleButtonControl = styled.div(
   css`
@@ -69,15 +81,9 @@ const SubtitleLineControl = styled.div(
       display: flex;
       flex-direction: row;
       align-items: center;
-      font-size: ${props.size}rem;
-      margin-left: ${props.margin}rem;
       padding: 0.2rem;
       gap: 1rem;
-
-      ${!props.valid &&
-      css`
-        text-decoration: line-through;
-      `}
+      margin-left: ${props.margin}rem;
 
       &:hover {
         opacity: 0.9;
