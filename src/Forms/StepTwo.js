@@ -21,7 +21,6 @@ const StepTwo = (props) => {
             ...pageData,
             author: event.target.value
         }))
-
     }
 
     const areaChangeHandler = (event) => {

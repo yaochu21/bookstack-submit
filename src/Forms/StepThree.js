@@ -50,6 +50,19 @@ const StepThree = (props) => {
     // dispatch(setPage({ ...allData, subtitles: newData }));
   };
 
+  const editText = (lineID,newText) => {
+    let currLines = [].concat(lines);
+    let target = currLines.find((line) => line.id === lineID);
+    target.text = newText;
+    setLines(currLines);
+
+    // let newData = [].concat(subtitlesData);
+    // let editedSubtitle = newData.find((line) => line.id === lineID);
+    // editedSubtitle.text = newText;
+
+    // dispatch(setPage({ ...allData, subtitles: newData }));
+  }
+
   return (
     <React.Fragment>
       <div style={{fontSize:"0.8rem"}}>Subtitles</div>
@@ -62,6 +75,7 @@ const StepThree = (props) => {
                 level={subtitleData.level}
                 id={subtitleData.id}
                 valid={subtitleData.valid}
+                handleText={editText}
                 handleLevel={editLineLevel}
                 handleCross={removeLine}
               />

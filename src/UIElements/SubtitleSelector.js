@@ -1,7 +1,28 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { useRef, useState, useEffect } from "react";
 
 const SubtitleSelector = (props) => {
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    console.log("subtitle selector use effect");
+    if (text != props.line) {
+      setText(props.line);
+    }
+  }, [props.line]);
+
+  const onInputChangeHandler = (event) => {
+    setText(event.target.value);
+  };
+
+  const onInputBlurHandler = (event) => {
+    if (text != props.line) {
+      props.handleText(props.id, text);
+    }
+  };
+
   const raiseButtonHandler = (event) => {
     props.handleLevel(props.id, -1);
   };
@@ -32,9 +53,15 @@ const SubtitleSelector = (props) => {
 
   return (
     <SubtitleLineControl margin={marginLeft}>
-      <SubtitleLine size={fontSize} valid={props.valid}>
-        {props.line}
-      </SubtitleLine>
+      <SubtitleInput
+        size={fontSize}
+        valid={props.valid}
+        value={text}
+        onChange={onInputChangeHandler}
+        onBlur={onInputBlurHandler}
+        readOnly={!props.valid}
+      />
+
       <SubtitleButtonControl>
         <SubtitleButton onClick={raiseButtonHandler}>+</SubtitleButton>
         <SubtitleButton onClick={lowerButtonHandler}>-</SubtitleButton>
@@ -46,16 +73,23 @@ const SubtitleSelector = (props) => {
   );
 };
 
-const SubtitleLine = styled.div((props) => 
-  css`
-    font-size: ${props.size}rem;
-
-    ${!props.valid &&
+const SubtitleInput = styled.input(
+  (props) =>
     css`
-      text-decoration: line-through;
-      color: rgba(0,0,0,0.6);
-    `}
-  `
+      border: none;
+      width: 100%;
+      font-size: ${props.size}rem;
+      ${!props.valid &&
+      css`
+        text-decoration: line-through;
+        color: rgba(0, 0, 0, 0.6);
+      `}
+
+      &:focus {
+        outline: none;
+        border: none;
+      }
+    `
 );
 
 const SubtitleButtonControl = styled.div(
