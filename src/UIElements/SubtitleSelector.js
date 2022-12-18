@@ -2,80 +2,89 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 const SubtitleSelector = (props) => {
-  let timer = 0;
-  let prevent = false;
-  const delay = 50;
 
-  const lineClickHandler = (event) => {
-    console.log(event);
-    event.stopPropagation();
-    timer = setTimeout(function () {
-      if (!prevent) {
-        console.log("line clicked");
-      }
-      prevent = false;
-      props.handleLevel(props.id,1);
-    }, delay);
+  const raiseButtonHandler = (event) => {
+    props.handleLevel(props.id, -1);
   };
 
-  const lineDoubleClickHandler = (event) => {
-    event.stopPropagation();
-    clearTimeout(timer);
-    prevent = true;
-    console.log("line double clicked");
-    props.handleLevel(props.id,-1);
+  const lowerButtonHandler = (event) => {
+    props.handleLevel(props.id, 1);
   };
 
-  const fontSizeMapper = (level) => {
-    switch(level) {
-        case 1:
-            return 1;
-        case 2:
-            return 0.85;
-        case 3:
-            return 0.65;
-        default:
-            return 0.5;
-    }
+  const crossButtonHandler = (event) => {
+    props.handleCross(props.id,!props.valid);
   }
 
-  let fontSize = fontSizeMapper(props.level)
+  const fontSizeMapper = (level) => {
+    switch (level) {
+      case 1:
+        return 1;
+      case 2:
+        return 0.85;
+      case 3:
+        return 0.7;
+      default:
+        return 0.6;
+    }
+  };
+
+  let fontSize = fontSizeMapper(props.level);
   let marginLeft = props.level * 1.2;
 
   return (
-    <subtitleLineControl
-      style={{ fontSize: `${fontSize}rem`, marginLeft: `${marginLeft}rem` }}
-      onClick={lineClickHandler}
-      onDoubleClick={lineDoubleClickHandler}
-      valid={props.valid}
-    >
-      {props.line}
-    </subtitleLineControl>
+      <SubtitleLineControl
+        size={fontSize}
+        margin={marginLeft}
+        valid={props.valid}
+      >
+        <div>{props.line}</div>
+        <SubtitleButtonControl>
+          <SubtitleButton onClick={raiseButtonHandler}>+</SubtitleButton>
+          <SubtitleButton onClick={lowerButtonHandler}>-</SubtitleButton>
+        </SubtitleButtonControl>
+      </SubtitleLineControl>
   );
 };
 
-const subtitleLineControl = styled.button((props) => {
+const SubtitleButtonControl = styled.div(
   css`
-    border-color: transparent;
-    border-radius: 5px;
     display: flex;
-    align-items: center;
-    width: 10rem;
+    flex-direction: row;
+    gap: 0.5rem;
+    margin-left: auto;
+  `
+);
 
-    ${!props.valid && css`
+const SubtitleButton = styled.button(
+  css`
+    font-size: 0.8rem;
+  `
+);
+
+const SubtitleLineControl = styled.div(
+  (props) =>
+    css`
+      border-color: black;
+      border-radius: 2px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      font-size: ${props.size}rem;
+      margin-left: ${props.margin}rem;
+      padding: 0.2rem;
+      gap: 1rem;
+
+      ${!props.valid &&
+      css`
         text-decoration: line-through;
-    `}
+      `}
 
-    &:hover {
-      opacity: 0.5;
-      box-shadow: 5.2px 5.2px 8px rgba(153, 153, 153, 0.25);
-    }
-
-    &:focus {
-      opacity: 0.5;
-      box-shadow: 5.2px 5.2px 8px rgba(153, 153, 153, 0.25);
-    }
-  `;
-});
+      &:hover {
+        opacity: 0.9;
+        background-color: rgba(209, 209, 209, 0.5);
+        /* box-shadow: 2.2px 2.2px 5px rgba(100, 100, 100, 0.25); */
+      }
+    `
+);
 
 export default SubtitleSelector;

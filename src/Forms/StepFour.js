@@ -24,7 +24,7 @@ const StepFour = (props) => {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div style={{ display: "flex", flexDirection: "column", marginTop:"1rem" }}>
       <div>
         <button onClick={onSubmitHandler}> Post </button>
         {isFetching && <ReactLoading type="spinningBubbles" color="gray" width={32} height={32}/>}

@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from "react";
 import StepOne from "./Forms/StepOne";
 import StepTwo from "./Forms/StepTwo";
 import StepThree from "./Forms/StepThree";
@@ -12,7 +11,7 @@ function App() {
       style={{
         position: "absolute",
         marginLeft: "10rem",
-        marginTop: "10rem",
+        marginTop: "5rem",
         display: "flex",
         flexDirection: "column",
         gap: "1.5rem"
