@@ -5,8 +5,9 @@ export const pageDataSlice = createSlice({
   initialState: {
     url: "",
     data: {
+      text: "",
       author: "",
-      year: "",
+      date: "",
       area: "",
       title: "",
       tags: [],

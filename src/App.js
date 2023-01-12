@@ -14,7 +14,8 @@ function App() {
         marginTop: "5rem",
         display: "flex",
         flexDirection: "column",
-        gap: "1.5rem"
+        gap: "1.5rem",
+        width: "20rem"
       }}
     >
       <StepOne />

@@ -7,7 +7,8 @@ const SubtitleSelector = (props) => {
   const [text, setText] = useState("");
 
   useEffect(() => {
-    console.log("subtitle selector use effect");
+    // console.log("subtitle selector use effect");
+    // console.log(props.line);
     if (text != props.line) {
       setText(props.line);
     }

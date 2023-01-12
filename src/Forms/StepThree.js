@@ -18,66 +18,74 @@ const StepThree = (props) => {
 
   // actual data
   const allData = useSelector((state) => state.pageData.data);
-  const subtitlesData = useSelector((state) => state.pageData.data.subtitles);
+  const subtitleData = useSelector((state) => state.pageData.data.subtitles);
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   console.log("Step Three use effect");
+  //   setLines(subtitlesData);
+  // });
 
   const editLineLevel = (lineID, degree) => {
     // for demo data
-    let currLines = [].concat(lines);
-    let target = currLines.find((line) => line.id === lineID);
-    target.level += degree;
-    target.level = Math.max(1, target.level);
-    setLines(currLines);
+    // let currLines = [].concat(lines);
+    // let target = currLines.find((line) => line.id === lineID);
+    // target.level += degree;
+    // target.level = Math.max(1, target.level);
+    // setLines(currLines);
 
     // actual operation
-    // let newData = [].concat(subtitlesData);
-    // let editedSubtitle = newData.find((line) => line.id === lineID);
-    // editedSubtitle.level += degree;
+    let newSubtitles = JSON.parse(JSON.stringify(subtitleData));
+    let editedSubtitle = newSubtitles.find((line) => line.s === lineID);
+    let newLevel = editedSubtitle.level + degree;
+    newLevel = Math.min(Math.max(newLevel,1),5);
+    editedSubtitle.level = newLevel;
 
-    // dispatch(setPage({ ...allData, subtitles: newData }));
+
+    dispatch(setPage({ ...allData, subtitles: newSubtitles }));
   };
 
-  const removeLine = (lineID,isValid) => {
-    let currLines = [].concat(lines);
-    let target = currLines.find((line) => line.id === lineID);
-    target.valid = isValid;
-    setLines(currLines);
+  const editLineValidity = (lineID,isValid) => {
+    // let currLines = [].concat(lines);
+    // let target = currLines.find((line) => line.id === lineID);
+    // target.valid = isValid;
+    // setLines(currLines);
 
-    // let newData = [].concat(subtitlesData);
-    // let editedSubtitle = newData.find((line) => line.id === lineID);
-    // editedSubtitle.valid = false;
+    let newSubtitles = JSON.parse(JSON.stringify(subtitleData));
+    let editedSubtitle = newSubtitles.find((line) => line.s === lineID);
+    editedSubtitle.valid = isValid;
 
-    // dispatch(setPage({ ...allData, subtitles: newData }));
+    dispatch(setPage({ ...allData, subtitles: newSubtitles }));
   };
 
   const editText = (lineID,newText) => {
-    let currLines = [].concat(lines);
-    let target = currLines.find((line) => line.id === lineID);
-    target.text = newText;
-    setLines(currLines);
+    // let currLines = [].concat(lines);
+    // let target = currLines.find((line) => line.id === lineID);
+    // target.text = newText;
+    // setLines(currLines);
 
-    // let newData = [].concat(subtitlesData);
-    // let editedSubtitle = newData.find((line) => line.id === lineID);
-    // editedSubtitle.text = newText;
+    let newSubtitles = JSON.parse(JSON.stringify(subtitleData));
+    let editedSubtitle = newSubtitles.find((line) => line.s === lineID);
+    editedSubtitle.text = newText;
 
-    // dispatch(setPage({ ...allData, subtitles: newData }));
+    dispatch(setPage({ ...allData, subtitles: newSubtitles }));
   }
 
   return (
     <React.Fragment>
       <div style={{fontSize:"0.8rem"}}>Subtitles</div>
       <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-        {lines.map((subtitleData) => {
+        {subtitleData.map((data) => {
           return (
             <div key={Math.random().toString()}>
               <SubtitleSelector
-                line={subtitleData.text}
-                level={subtitleData.level}
-                id={subtitleData.id}
-                valid={subtitleData.valid}
+                line={data.text}
+                level={data.level}
+                id={data.s}
+                valid={data.valid}
                 handleText={editText}
                 handleLevel={editLineLevel}
-                handleCross={removeLine}
+                handleCross={editLineValidity}
               />
             </div>
           );

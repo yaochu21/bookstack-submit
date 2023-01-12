@@ -10,6 +10,7 @@ const StepTwo = (props) => {
     const dispatch = useDispatch();
 
     const titleChangeHandler = (event) => {
+        console.log("title change handler:"+event.target.value);
         dispatch(setPage({
             ...pageData,
             title: event.target.value
@@ -17,6 +18,7 @@ const StepTwo = (props) => {
     }
 
     const authorChangeHandler = (event) => {
+        console.log("author change handler:"+event.target.value);
         dispatch(setPage({
             ...pageData,
             author: event.target.value
@@ -24,6 +26,7 @@ const StepTwo = (props) => {
     }
 
     const areaChangeHandler = (event) => {
+        console.log("area change handler:"+event.target.value);
         dispatch(setPage({
             ...pageData,
             area: event.target.value
@@ -31,14 +34,19 @@ const StepTwo = (props) => {
     }
 
     const dateChangeHandler = (event) => {
+        console.log("date change handler:"+event.target.value);
         dispatch(setPage({
             ...pageData,
             date: event.target.value
         }))
     }
 
-    const tagsChangeHandler = (newTags) => {
-
+    const tagsChangeHandler = (event) => {
+        let newTags = event.target.value.split(',');
+        dispatch(setPage({
+            ...pageData,
+            tags: newTags
+        }))
     }
 
     return (
@@ -47,7 +55,7 @@ const StepTwo = (props) => {
             <PageDataInput field={"Date"} edit={dateChangeHandler} value={pageData.date}/>
             <PageDataInput field={"Author"} edit={authorChangeHandler} value={pageData.author}/>
             <PageDataInput field={"Area"} edit={areaChangeHandler} value={pageData.area}/>
-            <PageDataInput field={"Tags"} edit={tagsChangeHandler} value={pageData.tags}/>
+            <PageDataInput field={"Tags"} edit={tagsChangeHandler} value={pageData.tags.join()}/>
         </div>
     )
 

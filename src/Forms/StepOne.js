@@ -82,6 +82,8 @@ const StepOne = (props) => {
         console.log(jsonObject);
         let cleanedData = jsonObject;
 
+        cleanedData.subtitles = cleanedData.subtitles.map(subtitle => {return {...subtitle,valid:true}});
+
         // write data to store
         dispatch(setURL(urlInput));
         dispatch(setPage(cleanedData));
@@ -92,13 +94,13 @@ const StepOne = (props) => {
   const handleFetchError = (error) => {
     console.log("Error during fetch: " + error);
     setIsFetching(false);
-    setErrorMessage("Connection Error");
+    setErrorMessage("Error during fetch");
   };
 
   const validateHttpURL = (urlString) => {
     try {
       let urlObject = new URL(urlString);
-      if (urlObject.protocol.indexOf("http") != 0) {
+      if (urlObject.protocol.indexOf("http") !== 0) {
         return false;
       }
       return true;
@@ -147,6 +149,7 @@ const StepOneContainer = styled.div`
   gap: 0.5rem;
   justify-content: center;
   align-items: center;
+  margin-right: auto;
 `
 
 export default StepOne;
