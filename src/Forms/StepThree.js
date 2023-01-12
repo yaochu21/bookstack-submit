@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import SubtitleSelector from "../UIElements/SubtitleSelector";
 import { setURL, setPage, clear } from "../Store/pageDataSlice";
 

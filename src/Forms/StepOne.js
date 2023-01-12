@@ -3,7 +3,7 @@ import { useState } from "react";
 import StepContainer from "../UIElements/StepContainer";
 import styled, { css } from "styled-components";
 import ReactLoading from 'react-loading';
-import {useSelector,useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {setURL,setPage,clear} from '../Store/pageDataSlice';
 
 const StepOne = (props) => {

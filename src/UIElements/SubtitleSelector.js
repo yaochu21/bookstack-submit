@@ -1,6 +1,5 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
 import { useRef, useState, useEffect } from "react";
 
 const SubtitleSelector = (props) => {
@@ -9,7 +8,7 @@ const SubtitleSelector = (props) => {
   useEffect(() => {
     // console.log("subtitle selector use effect");
     // console.log(props.line);
-    if (text != props.line) {
+    if (text !== props.line) {
       setText(props.line);
     }
   }, [props.line]);
@@ -19,7 +18,7 @@ const SubtitleSelector = (props) => {
   };
 
   const onInputBlurHandler = (event) => {
-    if (text != props.line) {
+    if (text !== props.line) {
       props.handleText(props.id, text);
     }
   };
