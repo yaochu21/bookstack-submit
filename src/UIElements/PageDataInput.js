@@ -7,7 +7,7 @@ const PageDataInput = (props) => {
         <DataInputLabel>{props.field}</DataInputLabel>
       </div>
 
-      <DataInputField onChange={props.edit} value={props.value} />
+      <DataInputField onChange={props.edit} value={props.value} readOnly={props.readonly}/>
     </DataInputControl>
   );
 };
@@ -19,7 +19,7 @@ const DataInputControl = styled.div`
 `;
 
 const DataInputLabel = styled.div`
-  width: 2.2rem;
+  width: 5rem;
   font-size: 0.8rem;
   height: 100%;
   display: flex;

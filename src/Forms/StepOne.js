@@ -5,6 +5,7 @@ import styled, { css } from "styled-components";
 import ReactLoading from 'react-loading';
 import {useDispatch} from 'react-redux';
 import {setURL,setPage,clear} from '../Store/pageDataSlice';
+import {setStep} from '../Store/stepControlSlice';
 
 const StepOne = (props) => {
   const [urlInput, setURLInput] = useState("Enter url here...");
@@ -77,11 +78,14 @@ const StepOne = (props) => {
       .then((jsonObject) => {
 
         setIsFetching(false);
+        dispatch(setStep(1));
 
         // data inspection and cleaning
         console.log(jsonObject);
         let cleanedData = jsonObject;
 
+        cleanedData.rtype = [""];
+        cleanedData.author = [""];
         cleanedData.subtitles = cleanedData.subtitles.map(subtitle => {return {...subtitle,valid:true}});
 
         // write data to store

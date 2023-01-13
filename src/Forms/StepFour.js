@@ -6,20 +6,32 @@ import ReactLoading from 'react-loading';
 const StepFour = (props) => {
   const data = useSelector((state) => state.pageData.data);
   const url = useSelector((state) => state.pageData.url);
-  console.log(data)
+  //console.log(data)
 
   const [postedPageLink, setPostedPageLink] = useState("");
   const [isFetching, setIsFetching] = useState(false);
   const [errorMessage,setErrorMessage] = useState("");
 
+  const currStep = useSelector((state) => state.stepControl.step);
+  let opacity = 1;
+  let disabled = false;
+  if (currStep < 1) {
+    opacity = 0.5;
+    disabled = true;
+  }
+
   const onSubmitHandler = (event) => {
+
+    console.log(data);
+    return
+
     if (isFetching) {
       return;
     }
     setIsFetching(true);
 
-    const api = "https://bookstack.laodongqushi.com/process";
-    const postData = { url: url, data: data };
+    const api = "https://bookstack.laodongqushi.com/publish";
+    const postData = { data: data };
 
     fetch(api, {
       method: "POST",
@@ -48,8 +60,7 @@ const StepFour = (props) => {
         // data inspection and cleaning
         console.log(jsonObject);
         let cleanedData = jsonObject;
-        let bookstackURL = cleanedData.bookstackURL;
-        let bookStackURL = cleanedData.errorMessage;
+        let result = cleanedData.result;
       })
       .catch(handleFetchError);
   };
@@ -61,9 +72,9 @@ const StepFour = (props) => {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", marginTop:"1rem" }}>
+    <div style={{ display: "flex", flexDirection: "column", marginTop:"1rem", opacity:opacity }}>
       <div>
-        <button onClick={onSubmitHandler}> Post </button>
+        <button onClick={onSubmitHandler} disabled={disabled}> Post </button>
         {isFetching && <ReactLoading type="spinningBubbles" color="gray" width={32} height={32}/>}
       </div>
       {postedPageLink.length > 0 && (

@@ -1,66 +1,124 @@
 import React from "react";
 import { useState, useRef } from "react";
 import styled, { css } from "styled-components";
-import {useDispatch, useSelector} from 'react-redux';
-import {setPage} from '../Store/pageDataSlice';
+import { useDispatch, useSelector } from "react-redux";
+import { setPage } from "../Store/pageDataSlice";
 import PageDataInput from "../UIElements/PageDataInput";
 
 const StepTwo = (props) => {
-    const pageData = useSelector(state => state.pageData.data);
-    const dispatch = useDispatch();
+  const pageData = useSelector((state) => state.pageData.data);
+  const dispatch = useDispatch();
 
-    const titleChangeHandler = (event) => {
-        console.log("title change handler:"+event.target.value);
-        dispatch(setPage({
-            ...pageData,
-            title: event.target.value
-        }));
-    }
+  const currStep = useSelector((state) => state.stepControl.step);
+  let opacity = 1;
+  let readonly = false;
+  if (currStep < 1) {
+    opacity = 0.5;
+    readonly = true;
+  }
 
-    const authorChangeHandler = (event) => {
-        console.log("author change handler:"+event.target.value);
-        dispatch(setPage({
-            ...pageData,
-            author: event.target.value
-        }))
-    }
+  const titleChangeHandler = (event) => {
+    console.log("title change handler:" + event.target.value);
+    dispatch(
+      setPage({
+        ...pageData,
+        title: event.target.value,
+      })
+    );
+  };
 
-    const areaChangeHandler = (event) => {
-        console.log("area change handler:"+event.target.value);
-        dispatch(setPage({
-            ...pageData,
-            area: event.target.value
-        }))
-    }
+  const authorChangeHandler = (event) => {
+    console.log("author change handler:" + event.target.value);
+    let authors = event.target.value.split(",");
+    dispatch(
+      setPage({
+        ...pageData,
+        author: authors,
+      })
+    );
+  };
 
-    const dateChangeHandler = (event) => {
-        console.log("date change handler:"+event.target.value);
-        dispatch(setPage({
-            ...pageData,
-            date: event.target.value
-        }))
-    }
+  const areaChangeHandler = (event) => {
+    console.log("area change handler:" + event.target.value);
+    dispatch(
+      setPage({
+        ...pageData,
+        area: event.target.value,
+      })
+    );
+  };
 
-    const tagsChangeHandler = (event) => {
-        let newTags = event.target.value.split(',');
-        dispatch(setPage({
-            ...pageData,
-            tags: newTags
-        }))
-    }
+  const dateChangeHandler = (event) => {
+    console.log("date change handler:" + event.target.value);
+    dispatch(
+      setPage({
+        ...pageData,
+        date: event.target.value,
+      })
+    );
+  };
 
-    return (
-        <div style={{display:"flex",flexDirection:"column",gap:"0.4rem"}}>
-            <PageDataInput field={"Title"} edit={titleChangeHandler} value={pageData.title}/>
-            <PageDataInput field={"Date"} edit={dateChangeHandler} value={pageData.date}/>
-            <PageDataInput field={"Author"} edit={authorChangeHandler} value={pageData.author}/>
-            <PageDataInput field={"Area"} edit={areaChangeHandler} value={pageData.area}/>
-            <PageDataInput field={"Tags"} edit={tagsChangeHandler} value={pageData.tags.join()}/>
-        </div>
-    )
+  const rtypeChangHandler = (event) => {
+    console.log("rtype change handler:" + event.target.value);
+    let rtype = event.target.value.split(",");
+    dispatch(
+      setPage({
+        ...pageData,
+        rtype: rtype,
+      })
+    );
+  };
 
+  const tagsChangeHandler = (event) => {
+    let newTags = event.target.value.split(",");
+    dispatch(
+      setPage({
+        ...pageData,
+        tags: newTags,
+      })
+    );
+  };
 
-
-}
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem",opacity:opacity }}>
+      <PageDataInput
+        field={"文章标题"}
+        edit={titleChangeHandler}
+        value={pageData.title}
+        readonly={readonly}
+      />
+      <PageDataInput
+        field={"发布年份"}
+        edit={dateChangeHandler}
+        value={pageData.date}
+        readonly={readonly}
+      />
+      <PageDataInput
+        field={"作者"}
+        edit={authorChangeHandler}
+        value={pageData.author.join()}
+        readonly={readonly}
+      />
+      <PageDataInput
+        field={"地区"}
+        edit={areaChangeHandler}
+        value={pageData.area}
+        readonly={readonly}
+      />
+      <PageDataInput
+        field={"报告类型"}
+        edit={rtypeChangHandler}
+        value={pageData.rtype.join()}
+        readonly={readonly}
+      />
+      <PageDataInput
+        field={"关键词"}
+        edit={tagsChangeHandler}
+        value={pageData.tags.join()}
+        readonly={readonly}
+      />
+    </div>
+  );
+};
 
 export default StepTwo;
