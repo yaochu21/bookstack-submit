@@ -2,6 +2,7 @@ import StepOne from "./Forms/StepOne";
 import StepTwo from "./Forms/StepTwo";
 import StepThree from "./Forms/StepThree";
 import StepFour from "./Forms/StepFour";
+import StepFive from "./Forms/StepFive";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <StepTwo />
         <StepThree />
         <StepFour />
+        <StepFive />
       </div>
     </div>
   );
