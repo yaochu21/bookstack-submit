@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
 import { setPage } from "../Store/pageDataSlice";
 import ImageDisplay from "../UIElements/ImageDisplay";
+import SegmentDisplay from "../UIElements/SegmentDisplay";
 
 const StepFour = (props) => {
   const currStep = useSelector((state) => state.stepControl.step);
@@ -16,6 +17,7 @@ const StepFour = (props) => {
 
   const allData = useSelector((state) => state.pageData.data);
   const imageData = useSelector((state) => state.pageData.data.imgs);
+  const segmentData = useSelector((state) => state.pageData.data.segments);
 
   const dispatch = useDispatch();
 
@@ -44,6 +46,14 @@ const StepFour = (props) => {
           );
         })}
       </ImagesContainer>
+      <ParagraphContainer style={{opacity: opacity}}>
+        {segmentData.map((segment) => {
+          return (
+            <SegmentDisplay text={segment.string} order={segment.order} />
+          )
+        })}
+      </ParagraphContainer>
+
     </React.Fragment>
   );
 };
@@ -58,5 +68,12 @@ const ImagesContainer = styled.div`
   width: 45rem;
   padding: 3px;
 `;
+
+const ParagraphContainer = styled.div`
+  display: flex;
+  row-gap: 1rem;
+  width: 45rem;
+  padding: 3px
+`
 
 export default StepFour;

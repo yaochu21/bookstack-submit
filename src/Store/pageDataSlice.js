@@ -12,7 +12,6 @@ export const pageDataSlice = createSlice({
       area: "",
       rtype: [""],
       tags: [""],
-      subtitles: [],
       imgs: [
         {
           url: "https://i.guim.co.uk/img/media/7a633730f5f90db3c12f6efc954a2d5b475c3d4a/0_138_5544_3327/master/5544.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=27c09d27ccbd139fd0f7d1cef8f7d41d",

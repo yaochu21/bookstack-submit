@@ -13,35 +13,36 @@ const StepThree = (props) => {
 
   // actual data
   const allData = useSelector((state) => state.pageData.data);
-  const subtitleData = useSelector((state) => state.pageData.data.subtitles);
+  const segmentData = useSelector((state) => state.pageData.data.segments);
   const dispatch = useDispatch();
+
+  let subtitleData = segmentData.filter((segment) => {return (segment.type === "SUBTITLE")});
 
   const editLineLevel = (lineID, degree) => {
     // actual operation
-    let newSubtitles = JSON.parse(JSON.stringify(subtitleData));
-    let editedSubtitle = newSubtitles.find((line) => line.s === lineID);
+    let newSegments = JSON.parse(JSON.stringify(segmentData));
+    let editedSubtitle = newSegments.find((line) => line.s === lineID);
     let newLevel = editedSubtitle.level + degree;
     newLevel = Math.min(Math.max(newLevel,1),5);
     editedSubtitle.level = newLevel;
 
-
-    dispatch(setPage({ ...allData, subtitles: newSubtitles }));
+    dispatch(setPage({ ...allData, segments: newSegments }));
   };
 
   const editLineValidity = (lineID,isValid) => {
-    let newSubtitles = JSON.parse(JSON.stringify(subtitleData));
-    let editedSubtitle = newSubtitles.find((line) => line.s === lineID);
+    let newSegments = JSON.parse(JSON.stringify(segmentData));
+    let editedSubtitle = newSegments.find((line) => line.s === lineID);
     editedSubtitle.valid = isValid;
 
-    dispatch(setPage({ ...allData, subtitles: newSubtitles }));
+    dispatch(setPage({ ...allData, segments: newSegments }));
   };
 
   const editText = (lineID,newText) => {
-    let newSubtitles = JSON.parse(JSON.stringify(subtitleData));
-    let editedSubtitle = newSubtitles.find((line) => line.s === lineID);
+    let newSegments = JSON.parse(JSON.stringify(segmentData));
+    let editedSubtitle = newSegments.find((line) => line.s === lineID);
     editedSubtitle.text = newText;
 
-    dispatch(setPage({ ...allData, subtitles: newSubtitles }));
+    dispatch(setPage({ ...allData, segments: newSegments }));
   }
 
   return (
