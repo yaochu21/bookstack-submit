@@ -19,7 +19,10 @@ const StepFour = (props) => {
   const imageData = useSelector((state) => state.pageData.data.imgs);
   const segmentData = useSelector((state) => state.pageData.data.segments);
 
+  const numSegments = segmentData.length;
+
   const dispatch = useDispatch();
+  console.log(imageData)
 
   const editImageValidity = (id) => {
     if (!available) {
@@ -32,6 +35,17 @@ const StepFour = (props) => {
     dispatch(setPage({ ...allData, imgs: newImages }));
   };
 
+  const editImageOrder = (value,id) => {
+    if (!available) {
+      return;
+    }
+
+    let newImages = JSON.parse(JSON.stringify(imageData));
+    let editedImage = newImages.find((img) => img.id === id);
+    editedImage.order = parseInt(value)
+    dispatch(setPage({ ...allData, imgs: newImages }));
+  }
+
   return (
     <React.Fragment>
       <div style={{ fontSize: "0.8rem", opacity: opacity }}>编辑图片</div>
@@ -41,12 +55,14 @@ const StepFour = (props) => {
             <ImageDisplay
               image={image}
               editImageValidity={editImageValidity}
+              editImageOrder={editImageOrder}
               key={Math.random().toString()}
+              numSegments={numSegments}
             />
           );
         })}
       </ImagesContainer>
-      <div style={{ fontSize: "0.8rem", opacity: opacity }}>放置图片</div>
+      <div style={{ fontSize: "0.8rem", opacity: opacity }}>段落位置参考</div>
       <ParagraphContainer style={{opacity: opacity}}>
         {segmentData.map((segment) => {
           if (segment.type === "BODY") {

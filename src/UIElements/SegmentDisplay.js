@@ -32,6 +32,7 @@ const SegmentText = styled.div`
     overflow: hidden;
     white-space: nowrap;
     overflow-wrap: break-word;
+    font-size: 15px;
 `
 
 export default SegmentDisplay;

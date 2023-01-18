@@ -4,12 +4,27 @@ import styled, { css } from "styled-components";
 
 const ImageDisplay = (props) => {
 
-  const onImageClickHandler = (event) => {
+  const onImageDoubleClickHandler = (event) => {
     props.editImageValidity(props.image.id)
   };
 
-  return (<ImageDisplayBox valid={props.image.valid} onClick={onImageClickHandler}>
+  const onSelectDropdownHandler = (event) => {
+    console.log(event.target.value)
+    props.editImageOrder(event.target.value,props.image.id)
+    event.stopPropagation()
+  }
+
+  let optionValues = []
+  for (let i = 0; i < props.numSegments; i++) {
+    optionValues.push(i * 100)
+  }
+  let options = optionValues.map((option) => {return (<option selected={(props.image.order === option) ? true : null} value={option} key={Math.random().toString()}>{option.toString()}</option>)})
+
+  return (<ImageDisplayBox valid={props.image.valid} onDoubleClick={onImageDoubleClickHandler}>
     <Image referrerPolicy="no-referrer" src={props.image.url}/>
+    <ImageOrderSelect onChange={onSelectDropdownHandler} disabled={props.image.valid ? null : true}>
+      {options}
+    </ImageOrderSelect>
   </ImageDisplayBox>)
 };
 
@@ -38,5 +53,14 @@ const Image = styled.img`
   object-position: center;
   font-size: 10px;
 `;
+
+const ImageOrderSelect = styled.select`
+  position: relative;
+  bottom: 10rem;
+  left: 6.9rem;
+  box-shadow: 4px 4px 8px rgba(200, 200, 200, 0.4);
+  border-radius: 5px;
+  /* border: dashed; */
+`
 
 export default ImageDisplay;
