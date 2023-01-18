@@ -9,7 +9,7 @@ const ImageDisplay = (props) => {
   };
 
   return (<ImageDisplayBox valid={props.image.valid} onClick={onImageClickHandler}>
-    <Image src={props.image.url}/>
+    <Image referrerPolicy="no-referrer" src={props.image.url}/>
   </ImageDisplayBox>)
 };
 
@@ -21,11 +21,12 @@ const ImageDisplayBox = styled.div(
     border: dashed;
     border-width: 2px;
     border-radius: 2px;
-    border-color: rgb(100, 100, 100);
+    border-color: black;
 
     ${!props.valid &&
     css`
-      opacity: 50%;
+      opacity: 20%;
+      border-color: rgb(100,100,100);
     `}
   `
 );

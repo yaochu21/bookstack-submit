@@ -46,14 +46,19 @@ const StepFour = (props) => {
           );
         })}
       </ImagesContainer>
+      <div style={{ fontSize: "0.8rem", opacity: opacity }}>放置图片</div>
       <ParagraphContainer style={{opacity: opacity}}>
         {segmentData.map((segment) => {
-          return (
-            <SegmentDisplay text={segment.string} order={segment.order} />
-          )
+          if (segment.type === "BODY") {
+            return (
+              <SegmentDisplay text={segment.string} order={segment.order} key={Math.random().toString()}/>
+            )
+          }
+          else {
+            return null;
+          }
         })}
       </ParagraphContainer>
-
     </React.Fragment>
   );
 };
@@ -71,6 +76,7 @@ const ImagesContainer = styled.div`
 
 const ParagraphContainer = styled.div`
   display: flex;
+  flex-direction: column;
   row-gap: 1rem;
   width: 45rem;
   padding: 3px

@@ -30,6 +30,7 @@ const SegmentContainer = styled.div`
 const SegmentText = styled.div`
     width: 75%;
     overflow: hidden;
+    white-space: nowrap;
     overflow-wrap: break-word;
 `
 

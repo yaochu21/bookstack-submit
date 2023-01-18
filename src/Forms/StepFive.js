@@ -30,7 +30,8 @@ const StepFive = (props) => {
     }
     setIsFetching(true);
 
-    const api = "https://bookstack.laodongqushi.com/publish";
+    // const api = "https://bookstack.laodongqushi.com/publish";
+    const api = "http://0.0.0.0:80";
     const postData = { data: data };
 
     fetch(api, {
