@@ -22,7 +22,7 @@ const ImageDisplay = (props) => {
 
   return (<ImageDisplayBox valid={props.image.valid} onDoubleClick={onImageDoubleClickHandler}>
     <Image referrerPolicy="no-referrer" src={props.image.url}/>
-    <ImageOrderSelect onChange={onSelectDropdownHandler} disabled={props.image.valid ? null : true}>
+    <ImageOrderSelect onChange={onSelectDropdownHandler} disabled={props.image.valid && props.available ? null : true}>
       {options}
     </ImageOrderSelect>
   </ImageDisplayBox>)
@@ -57,7 +57,7 @@ const Image = styled.img`
 const ImageOrderSelect = styled.select`
   position: relative;
   bottom: 10rem;
-  left: 6.9rem;
+  left: 6.3rem;
   box-shadow: 4px 4px 8px rgba(200, 200, 200, 0.4);
   border-radius: 5px;
   /* border: dashed; */
