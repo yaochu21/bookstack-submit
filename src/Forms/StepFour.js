@@ -22,7 +22,7 @@ const StepFour = (props) => {
   const numSegments = segmentData.length;
 
   const dispatch = useDispatch();
-  console.log(imageData)
+  //console.log(imageData)
 
   const editImageValidity = (id) => {
     if (!available) {

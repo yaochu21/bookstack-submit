@@ -1,12 +1,14 @@
 import React from "react";
-import { useState, useRef } from "react";
-import styled, { css } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { setPage } from "../Store/pageDataSlice";
 import PageDataInput from "../UIElements/PageDataInput";
+import BookSelect from "../UIElements/BookSelect";
 
 const StepTwo = (props) => {
   const pageData = useSelector((state) => state.pageData.data);
+  console.log(pageData)
+  console.log(pageData.book_id)
+
   const dispatch = useDispatch();
 
   const currStep = useSelector((state) => state.stepControl.step);
@@ -79,6 +81,15 @@ const StepTwo = (props) => {
     );
   };
 
+  const bookSelectHandler = (value) => {
+    dispatch(
+      setPage({
+        ...pageData,
+        book_id: parseInt(value)
+      })
+    )
+  }
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem",opacity:opacity }}>
       <PageDataInput
@@ -117,6 +128,7 @@ const StepTwo = (props) => {
         value={pageData.tags.join()}
         readonly={readonly}
       />
+      <BookSelect field={"图书"} bookSelectHandler={bookSelectHandler} curr_id={pageData.book_id} readonly={readonly}/>
     </div>
   );
 };

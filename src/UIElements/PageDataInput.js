@@ -31,3 +31,4 @@ const DataInputField = styled.input`
 `;
 
 export default PageDataInput;
+export {DataInputControl,DataInputLabel}
