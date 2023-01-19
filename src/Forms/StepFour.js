@@ -58,6 +58,7 @@ const StepFour = (props) => {
               editImageOrder={editImageOrder}
               key={Math.random().toString()}
               numSegments={numSegments}
+              available={available}
             />
           );
         })}

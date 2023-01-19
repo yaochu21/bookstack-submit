@@ -84,6 +84,7 @@ const StepOne = (props) => {
         console.log(jsonObject);
         let cleanedData = jsonObject;
 
+        cleanedData.area = "";
         cleanedData.rtype = [""];
         cleanedData.author = [""];
         // cleanedData.imgs = [

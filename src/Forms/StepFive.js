@@ -23,7 +23,7 @@ const StepFive = (props) => {
   const onSubmitHandler = (event) => {
 
     console.log(data);
-    return
+    // return
 
     if (isFetching) {
       return;
@@ -31,8 +31,8 @@ const StepFive = (props) => {
     setIsFetching(true);
 
     // const api = "https://bookstack.laodongqushi.com/publish";
-    const api = "http://0.0.0.0:80";
-    const postData = { data: data };
+    const api = "http://127.0.0.1:5000/publish";
+    const postData = { url: url, data: data };
 
     fetch(api, {
       method: "POST",
