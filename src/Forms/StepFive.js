@@ -33,7 +33,6 @@ const StepFive = (props) => {
     const api = "http://127.0.0.1:5000/publish";
     const postData = { url: "", data: JSON.stringify(data) };
 
-
     fetch(api, {
       method: "POST",
       headers: {
