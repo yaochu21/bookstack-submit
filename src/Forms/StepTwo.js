@@ -6,9 +6,7 @@ import BookSelect from "../UIElements/BookSelect";
 
 const StepTwo = (props) => {
   const pageData = useSelector((state) => state.pageData.data);
-  console.log(pageData)
-  console.log(pageData.book_id)
-
+  // console.log(pageData)
   const dispatch = useDispatch();
 
   const currStep = useSelector((state) => state.stepControl.step);
