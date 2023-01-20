@@ -78,6 +78,7 @@ const StepOne = (props) => {
       .then((jsonObject) => {
 
         setIsFetching(false);
+        setErrorMessage("")
         dispatch(setStep(1));
 
         // data inspection and cleaning

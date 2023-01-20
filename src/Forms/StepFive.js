@@ -56,6 +56,7 @@ const StepFive = (props) => {
       .then((jsonObject) => {
 
         setIsFetching(false);
+        setErrorMessage("")
         setSuccess(true)
         setErrorMessage("")
         console.log(jsonObject)
@@ -78,14 +79,10 @@ const StepFive = (props) => {
       </div>
       {success && (
         <div>
-          <span> "Success! The page you created is at: " </span>
+          <span style={{color:"black",fontSize:"0.75rem"}}> Success! </span>
         </div>
       )}
-      {errorMessage.length > 0 && (
-        <div>
-          <span>{errorMessage}</span>
-        </div>
-      )}
+      {errorMessage.length > 0 && (<div><span style={{color:"red",fontSize:"0.75rem"}}>{errorMessage}</span></div>)}
     </div>
   );
 };
