@@ -8,7 +8,7 @@ const StepFive = (props) => {
   const url = useSelector((state) => state.pageData.url);
   //console.log(data)
 
-  const [postedPageLink, setPostedPageLink] = useState("");
+  const [success, setSuccess] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   const [errorMessage,setErrorMessage] = useState("");
 
@@ -56,11 +56,9 @@ const StepFive = (props) => {
       .then((jsonObject) => {
 
         setIsFetching(false);
-
-        // data inspection and cleaning
-        console.log(jsonObject);
-        let cleanedData = jsonObject;
-        let result = cleanedData.result;
+        setSuccess(true)
+        console.log(jsonObject)
+        
       })
       .catch(handleFetchError);
   };
@@ -77,7 +75,7 @@ const StepFive = (props) => {
         <button onClick={onSubmitHandler} disabled={disabled}> Post </button>
         {isFetching && <ReactLoading type="spinningBubbles" color="gray" width={32} height={32}/>}
       </div>
-      {postedPageLink.length > 0 && (
+      {success > 0 && (
         <div>
           <span> "Success! The page you created is at: " </span>
           <a href={postedPageLink}>{postedPageLink}</a>
