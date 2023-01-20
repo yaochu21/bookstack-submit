@@ -25,6 +25,7 @@ function App() {
         <StepThree />
         <StepFour />
         <StepFive />
+        <div style={{height:"80px"}} />
       </div>
     </div>
   );

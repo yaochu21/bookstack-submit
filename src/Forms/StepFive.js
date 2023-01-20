@@ -28,6 +28,8 @@ const StepFive = (props) => {
       return;
     }
     setIsFetching(true);
+    setSuccess(false);
+    setErrorMessage("")
 
     // const api = "https://bookstack.laodongqushi.com/publish";
     const api = "http://127.0.0.1:5000/publish";
@@ -72,11 +74,11 @@ const StepFive = (props) => {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", marginTop:"1rem", opacity:opacity }}>
+    <div style={{ display: "flex", flexDirection: "row", marginTop:"1rem", gap:"1rem", opacity:opacity }}>
       <div>
         <button onClick={onSubmitHandler} disabled={disabled}> Post </button>
-        {isFetching && <ReactLoading type="spinningBubbles" color="gray" width={32} height={32}/>}
       </div>
+      {isFetching && <ReactLoading type="spinningBubbles" color="gray" width={32} height={32}/>}
       {success && (
         <div>
           <span style={{color:"black",fontSize:"0.75rem"}}> Success! </span>
