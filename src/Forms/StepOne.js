@@ -87,7 +87,7 @@ const StepOne = (props) => {
         cleanedData.area = "";
         cleanedData.rtype = [""];
         cleanedData.author = [""];
-        cleanedData.book_id = 0;
+        cleanedData.book_id = 1;
 
         // write data to store
         dispatch(setURL(urlInput));
