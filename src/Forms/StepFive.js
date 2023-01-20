@@ -56,6 +56,7 @@ const StepFive = (props) => {
       .then((jsonObject) => {
 
         setIsFetching(false);
+        setErrorMessage("")
         setSuccess(true)
         console.log(jsonObject)
         
@@ -75,12 +76,12 @@ const StepFive = (props) => {
         <button onClick={onSubmitHandler} disabled={disabled}> Post </button>
         {isFetching && <ReactLoading type="spinningBubbles" color="gray" width={32} height={32}/>}
       </div>
-      {success > 0 && (
+      {success && (
         <div>
-          <span> "Success! The page you created is at: " </span>
-          <a href={postedPageLink}>{postedPageLink}</a>
+          <span style={{color:"black",fontSize:"0.75rem"}}> Success! </span>
         </div>
       )}
+      {!success && (<div><span style={{color:"red",fontSize:"0.75rem"}}>{errorMessage}</span></div>)}
     </div>
   );
 };
