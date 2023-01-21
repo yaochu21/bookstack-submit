@@ -20,6 +20,14 @@ const StepFour = (props) => {
 
   const numSegments = segmentData.length;
 
+  let paragraphOptions = []
+  for (let i = 0; i < numSegments; i++) {
+    if (segmentData[i].type !== "BODY") {
+      continue;
+    }
+    paragraphOptions.push({"label":segmentData[i].order.toString() +":" + segmentData[i].string.slice(3,14)+"...","value":segmentData[i].order})
+  }
+
   const dispatch = useDispatch();
   //console.log(imageData)
 
@@ -53,6 +61,7 @@ const StepFour = (props) => {
           return (
             <ImageDisplay
               image={image}
+              paragraphOptions={paragraphOptions}
               editImageValidity={editImageValidity}
               editImageOrder={editImageOrder}
               key={Math.random().toString()}
