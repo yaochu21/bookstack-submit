@@ -31,8 +31,8 @@ const StepFive = (props) => {
     setSuccess(false);
     setErrorMessage("")
 
-    const api = "https://bookstack.laodongqushi.com/publish";
-    //const api = "http://127.0.0.1:5000/publish";
+    // const api = "https://bookstack.laodongqushi.com/publish";
+    const api = "http://127.0.0.1:5000/publish";
     const postData = { url: url, data: JSON.stringify(data) };
 
     fetch(api, {
