@@ -13,7 +13,7 @@ const StepFive = (props) => {
   const [errorMessage,setErrorMessage] = useState("");
 
   const currStep = useSelector((state) => state.stepControl.step);
-  const api = useSelector((state) => state.debug.api)
+  const api_publish = useSelector((state) => state.debug.api_publish)
 
   let opacity = 1;
   let disabled = false;
@@ -34,10 +34,10 @@ const StepFive = (props) => {
     setErrorMessage("")
 
     //const api = "https://bookstack.laodongqushi.com/publish";
-    // const api = "http://127.0.0.1:5000/publish";
+    //const api = "http://127.0.0.1:5000/publish";
     const postData = { url: url, data: JSON.stringify(data) };
 
-    fetch(api, {
+    fetch(api_publish, {
       method: "POST",
       headers: {
         "content-type": "application/json",

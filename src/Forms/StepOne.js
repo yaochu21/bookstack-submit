@@ -12,7 +12,7 @@ const StepOne = (props) => {
   const [isFetching, setIsFetching] = useState(false);
   const [errorMessage,setErrorMessage] = useState("");
 
-  const api = useSelector((state) => state.debug.api);
+  const api_process = useSelector((state) => state.debug.api_process);
   const dispatch = useDispatch();
 
   const onChangeHandler = (event) => {
@@ -54,7 +54,7 @@ const StepOne = (props) => {
     const data = { url: urlInput, data: "" };
 
     setIsFetching(true);
-    fetch(api, {
+    fetch(api_process, {
       method: "POST",
       headers: {
         "content-type": "application/json",
