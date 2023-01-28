@@ -10,7 +10,7 @@ const StepFour = (props) => {
   let available = true;
   let opacity = 1;
   if (currStep < 1) {
-    opacity = 0.5;
+    opacity = 0.3;
     available = false;
   }
 
@@ -55,7 +55,7 @@ const StepFour = (props) => {
 
   return (
     <React.Fragment>
-      <div style={{ fontSize: "0.8rem", opacity: opacity }}>编辑图片</div>
+      <div style={{ fontSize: "0.8rem", opacity: opacity }}>编辑图片 - 双击以保留或取消保留图片，选择右上方数字来更改图片在文中的位置（以页尾原文数字为参考：编号500的图片将放置在编号500的段落之后）</div>
       <ImagesContainer style={{ opacity: opacity }}>
         {imageData.map((image) => {
           return (
@@ -102,7 +102,7 @@ const ImagesContainer = styled.div`
 const ParagraphContainer = styled.div`
   display: flex;
   flex-direction: column;
-  row-gap: 1rem;
+  row-gap: 1.5rem;
   width: 45rem;
   padding: 3px
 `

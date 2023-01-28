@@ -6,13 +6,13 @@ const SegmentDisplay = (props) => {
     return (
         <SegmentContainer>
             <SegmentText>
-                {props.text}
+                {props.text.slice(3,props.text.length - 4)}
             </SegmentText>
             <div style={{width:"5%"}}>
-                ...
+                ----
             </div>
             <div styile={{width:"20%"}}>
-                {props.order}
+                <span style={{fontWeight:"bold",justifyContent:"flex-end"}}> {props.order} </span>
             </div>
         </SegmentContainer>
     )
@@ -27,11 +27,13 @@ const SegmentContainer = styled.div`
 `
 
 const SegmentText = styled.div`
-    width: 75%;
-    overflow: hidden;
-    white-space: nowrap;
+    /* white-space: nowrap;
+    overflow: hidden; */
+    width: 100%;
+    overflow: visible;
     overflow-wrap: break-word;
     font-size: 15px;
+    line-height: 25px;
 `
 
 export default SegmentDisplay;

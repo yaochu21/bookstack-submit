@@ -2,17 +2,18 @@ import React from "react";
 import { useState } from "react";
 import styled, { css } from "styled-components";
 import ReactLoading from 'react-loading';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setURL,setPage} from '../Store/pageDataSlice';
 import {setStep} from '../Store/stepControlSlice';
 
 const StepOne = (props) => {
-  const [urlInput, setURLInput] = useState("Enter url here...");
+  const [urlInput, setURLInput] = useState("在此输入文章链接...");
   const [isDefault, setIsDefault] = useState(true);
   const [isFetching, setIsFetching] = useState(false);
   const [errorMessage,setErrorMessage] = useState("");
 
-  const dispatch = useDispatch()
+  const api = useSelector((state) => state.debug.api);
+  const dispatch = useDispatch();
 
   const onChangeHandler = (event) => {
     setURLInput(event.target.value);
@@ -49,9 +50,7 @@ const StepOne = (props) => {
     if (isFetching) {
       return;
     }
-    
-    const api = "https://bookstack.laodongqushi.com/process";
-    //const api = "http://127.0.0.1:5000/process";
+
     const data = { url: urlInput, data: "" };
 
     setIsFetching(true);

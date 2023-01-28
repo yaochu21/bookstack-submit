@@ -13,6 +13,8 @@ const StepFive = (props) => {
   const [errorMessage,setErrorMessage] = useState("");
 
   const currStep = useSelector((state) => state.stepControl.step);
+  const api = useSelector((state) => state.debug.api)
+
   let opacity = 1;
   let disabled = false;
   if (currStep < 1) {
@@ -31,8 +33,8 @@ const StepFive = (props) => {
     setSuccess(false);
     setErrorMessage("")
 
-    const api = "https://bookstack.laodongqushi.com/publish";
-    //const api = "http://127.0.0.1:5000/publish";
+    //const api = "https://bookstack.laodongqushi.com/publish";
+    // const api = "http://127.0.0.1:5000/publish";
     const postData = { url: url, data: JSON.stringify(data) };
 
     fetch(api, {

@@ -37,7 +37,7 @@ const ImageDisplay = (props) => {
       valid={props.image.valid}
       onDoubleClick={onImageDoubleClickHandler}
     >
-      <Image referrerPolicy="no-referrer" src={props.image.url} />
+      <Image referrerPolicy="no-referrer" src={"data:image/png;base64, " + props.image.url} />
       <ImageOrderSelect
         onChange={onSelectDropdownHandler}
         disabled={props.image.valid && props.available ? null : true}

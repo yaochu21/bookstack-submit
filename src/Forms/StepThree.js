@@ -8,7 +8,7 @@ const StepThree = (props) => {
   const currStep = useSelector((state) => state.stepControl.step);
   let opacity = 1;
   if (currStep < 1) {
-    opacity = 0.5;
+    opacity = 0.3;
   }
 
   // actual data
@@ -47,7 +47,7 @@ const StepThree = (props) => {
 
   return (
     <React.Fragment>
-      <div style={{fontSize:"0.8rem",opacity:opacity}}>编辑区段</div>
+      <div style={{fontSize:"0.8rem",opacity:opacity}}>编辑区段标题 - 使用加减调整标题大小，使用x和√移除或复原标题</div>
       <div style={{ display: "flex", flexDirection: "column", gap: "1rem", opacity:opacity }}>
         {subtitleData.map((data) => {
           return (
